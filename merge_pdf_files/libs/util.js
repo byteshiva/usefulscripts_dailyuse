@@ -6,15 +6,11 @@ dotenv.config( { path : '.env'} )
 
 const FILENAME1 = process.env.FILENAME1
 const FILENAME2 = process.env.FILENAME2
-const mergedPrefix = process.env.OUTPUT_FILE_PREFIX
-const TAGS_KEYWORDS = process.env.TAGS_KEYWORDS
-const TAGS_KEYWORDS_SPLIT = TAGS_KEYWORDS.split(',')
-const AUTHORS = process.env.AUTHOR
-const TITLE = process.env.TITLE
-const SUBJECT = process.env.SUBJECT
-const PRODUCER = process.env.PRODUCER
-const CREATOR = process.env.CREATOR
+const FILENAME3 = process.env.FILENAME3
+const FILENAME4 = process.env.FILENAME4
 
+const mergedPrefix = process.env.OUTPUT_FILE_PREFIX
+const DEBUG_DO_NOT_MERGE_PDF_FILES = process.env.DEBUG_DO_NOT_MERGE_PDF_FILES
 
 const __dirname = path.dirname('./');
 const randomSeedValue = process.env.ADD_ENTROPY_SEED
@@ -22,8 +18,10 @@ const randomSeedValue = process.env.ADD_ENTROPY_SEED
 function getfileNames(){
     const file1 = path.join(__dirname, FILENAME1)
     const file2 = path.join(__dirname, FILENAME2)
+    const file3 = path.join(__dirname, FILENAME3)
+    const file4 = path.join(__dirname, FILENAME4)
 
-  return {file1, file2}
+  return {file1, file2, file3, file4}
 }
 
 function between(start, end) {
@@ -44,15 +42,12 @@ function getMergedFileName() {
     return mergedPrefix + addRandomSuffixGen(randomSeedValue)
 }
 
-function getPdfMetadata() {
+function getAuthRules() {
+
+    
     return {
-        keywords: TAGS_KEYWORDS_SPLIT,
-        title: TITLE,
-        author: AUTHORS,
-        subject: SUBJECT,
-        producer: PRODUCER,
-        creator: CREATOR
-    }
+        do_not_merge: DEBUG_DO_NOT_MERGE_PDF_FILES        
+    }   
 }
 
-export { getMergedFileName, getfileNames, getPdfMetadata }
+export { getMergedFileName, getfileNames, getAuthRules }
