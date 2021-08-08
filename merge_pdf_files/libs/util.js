@@ -7,6 +7,14 @@ dotenv.config( { path : '.env'} )
 const FILENAME1 = process.env.FILENAME1
 const FILENAME2 = process.env.FILENAME2
 const mergedPrefix = process.env.OUTPUT_FILE_PREFIX
+const TAGS_KEYWORDS = process.env.TAGS_KEYWORDS
+const TAGS_KEYWORDS_SPLIT = TAGS_KEYWORDS.split(',')
+const AUTHORS = process.env.AUTHOR
+const TITLE = process.env.TITLE
+const SUBJECT = process.env.SUBJECT
+const PRODUCER = process.env.PRODUCER
+const CREATOR = process.env.CREATOR
+
 
 const __dirname = path.dirname('./');
 const randomSeedValue = process.env.ADD_ENTROPY_SEED
@@ -36,4 +44,15 @@ function getMergedFileName() {
     return mergedPrefix + addRandomSuffixGen(randomSeedValue)
 }
 
-export { getMergedFileName, getfileNames }
+function getPdfMetadata() {
+    return {
+        keywords: TAGS_KEYWORDS_SPLIT,
+        title: TITLE,
+        author: AUTHORS,
+        subject: SUBJECT,
+        producer: PRODUCER,
+        creator: CREATOR
+    }
+}
+
+export { getMergedFileName, getfileNames, getPdfMetadata }
