@@ -8,7 +8,7 @@ or write a small shell script
 
 ```
   $touch createsym.sh
-  $chmod 777 createsy.sh
+  $chmod 777 createsym.sh
 ```
 
 ```
